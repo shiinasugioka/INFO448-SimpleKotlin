@@ -55,13 +55,13 @@ class Money(val amount: Int, val currency: String) {
 
         val conversionRates = mapOf(
             "USD" to mapOf("EUR" to 1.5, "CAN" to 1.25, "GBP" to 0.5),
-            "EUR" to mapOf("USD" to 0.67, "CAN" to 0.83, "GBP" to 0.333),
+            "EUR" to mapOf("USD" to 0.67, "CAN" to 0.83, "GBP" to 0.33),
             "CAN" to mapOf("USD" to 0.8, "EUR" to 1.2, "GBP" to 0.4),
             "GBP" to mapOf("USD" to 2.0, "EUR" to 3.0, "CAN" to 2.5)
         )
 
         val rate: Double = conversionRates[this.currency]?.get(newCurrency) ?: 1.0;
-        val newAmount: Int = (this.amount.toDouble() * rate).toInt();
+        val newAmount: Int = Math.ceil(this.amount.toDouble() * rate).toInt();
 
         return Money(newAmount, newCurrency);
     }
